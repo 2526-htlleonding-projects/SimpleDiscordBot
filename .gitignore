@@ -1,0 +1,80 @@
+# Rider
+.idea/
+
+# User-specific files
+.idea/*.user
+.idea/*.user*.sublime-workspace
+
+# Build directories
+bin/
+obj/
+
+# Rider-specific folder (stores cache, logs, etc)
+.idea/.idea/
+.idea/.idea_modules/
+
+# JetBrains Rider specific config
+.idea/rider/
+
+# VS Code specific
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# NUnit Test Result file
+TestResults/
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# NuGet packages (do not include these files, as they are restored by NuGet)
+*.nupkg
+# Generated .DLL files and build output
+*.dll
+*.exe
+*.pdb
+*.mdb
+
+# ASP.NET specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User config files
+.vsconfig
+
+# Node modules (if using Node.js)
+node_modules/
+
+# Rider Solution files
+.idea/.idea_references/
+
+# Mac specific files (if working with macOS, remove if not applicable)
+.AppleDouble
+.LSOverride
+
+# .NET Core files
+.vs/
+
+# Microsoft Visual Studio for Mac
+.vscode/
+
+# Files that Rider may use as a cache
+.idea/*
+
+# Ignore the generated .user files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# For IntelliJ IDEA users
+.idea/
+
+# IDE log files
+*.log
