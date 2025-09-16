@@ -78,3 +78,6 @@ node_modules/
 
 # IDE log files
 *.log
+
+# I shall not leak my token
+config.json
