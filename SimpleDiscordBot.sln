@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{836DA2FC-0DF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot_Core", "src\DiscordBot_Core\DiscordBot_Core.csproj", "{CDA54FA9-3F91-4D5B-A2CB-0FFC577890B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordBot_Module", "src\DiscordBot_Module\DiscordBot_Module.csproj", "{DD291ACC-B138-4622-A298-2C096069710D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,18 +29,6 @@ Global
 		{CDA54FA9-3F91-4D5B-A2CB-0FFC577890B3}.Release|x64.Build.0 = Release|Any CPU
 		{CDA54FA9-3F91-4D5B-A2CB-0FFC577890B3}.Release|x86.ActiveCfg = Release|Any CPU
 		{CDA54FA9-3F91-4D5B-A2CB-0FFC577890B3}.Release|x86.Build.0 = Release|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Debug|x64.Build.0 = Debug|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Debug|x86.Build.0 = Debug|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Release|x64.ActiveCfg = Release|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Release|x64.Build.0 = Release|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Release|x86.ActiveCfg = Release|Any CPU
-		{DD291ACC-B138-4622-A298-2C096069710D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
