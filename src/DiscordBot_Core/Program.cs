@@ -25,7 +25,9 @@ class Program
         
         //set interactions
         _interactions = new InteractionService(_client.Rest);
+        await _interactions.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
+        
         //event handlers
         _client.Log += LogAsync;
         _client.Ready += OnReady;
@@ -53,9 +55,13 @@ class Program
         await _interactions.ExecuteCommandAsync(ctx, null);
     }
 
-    private static Task OnReady()
+    private async Task<Task> OnReady()
     {
         Console.WriteLine("Bot is ready!");
+
+        const ulong guildId = 1411698864783888618;
+        await _interactions.RegisterCommandsToGuildAsync(guildId);
+        
         return Task.CompletedTask;
     }
 
