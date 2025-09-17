@@ -43,9 +43,7 @@ class Program
     
     private async Task InitCommands()
     {
-        var serviceProvider = new DependencyMap();
-        await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), serviceProvider);
-
+        await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
         _client.MessageReceived += HandleCommandAsync;
     }
 
