@@ -1,4 +1,4 @@
-﻿namespace DiscordBot_Module;
+﻿namespace DiscordBot_Core;
 
 static class Program
 {
