@@ -38,7 +38,7 @@ class Program
 
     public class BotConfig
     {
-        public string Token { get; set; } = null!;
+        public string Token { get; init; } = null!;
     }
     
     private async Task InitCommands()
@@ -49,8 +49,7 @@ class Program
 
     private async Task HandleCommandAsync(SocketMessage msg)
     {
-        var message = msg as SocketUserMessage;
-        if (message == null || message.Author.IsBot) return;
+        if (msg is not SocketUserMessage message || message.Author.IsBot) return;
 
         var argPos = 0;
         if (message.HasCharPrefix('!', ref argPos))
@@ -60,7 +59,7 @@ class Program
         }
     }
 
-    private Task OnReady()
+    private static Task OnReady()
     {
         Console.WriteLine("Bot is ready!");
         return Task.CompletedTask;
