@@ -52,7 +52,7 @@ class Program
         if (msg is not SocketUserMessage message || message.Author.IsBot) return;
 
         var argPos = 0;
-        if (message.HasCharPrefix('!', ref argPos))
+        if (message.HasCharPrefix('/', ref argPos))
         {
             var context = new SocketCommandContext(_client, message);
             Console.WriteLine("executing: " + msg.Content);
