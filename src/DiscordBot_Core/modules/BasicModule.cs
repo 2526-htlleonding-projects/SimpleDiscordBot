@@ -1,10 +1,11 @@
 using Discord.Commands;
+using Discord.Interactions;
 
 namespace DiscordBot_Core.modules;
 
-public class BasicModule : ModuleBase<SocketCommandContext>
+public class NiceBot : InteractionModuleBase<SocketInteractionContext>
 {
-    [Command("ping")]
-    public async Task PingAsync()
-        => await ReplyAsync("Pong!");
+    [SlashCommand("hibot", "a friendly greeting")]
+    public async Task Greeting()
+        => await ReplyAsync("Hi dear messenger! Great to see you again!");
 }
