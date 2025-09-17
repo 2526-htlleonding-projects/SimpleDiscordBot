@@ -55,6 +55,7 @@ class Program
         if (message.HasCharPrefix('!', ref argPos))
         {
             var context = new SocketCommandContext(_client, message);
+            Console.WriteLine("executing: " + msg.Content);
             await _commands.ExecuteAsync(context, argPos, null);
         }
     }
