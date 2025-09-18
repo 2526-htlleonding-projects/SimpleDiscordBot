@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using Discord.Commands;
+using Discord.Interactions;
 using Discord.WebSocket;
 
 namespace DiscordBot_Core;
@@ -10,21 +11,29 @@ using Discord;
 class Program
 {
     private DiscordSocketClient _client = null!;
-    private CommandService _commands = null!;
+    private InteractionService _interactions = null!;
 
     public static Task Main(string[] args) => new Program().MainAsync();
 
     private async Task MainAsync()
     {
+        //set client
         _client = new DiscordSocketClient(new DiscordSocketConfig
         {
             GatewayIntents = GatewayIntents.AllUnprivileged | (GatewayIntents)4096
         });
-        _commands = new CommandService();
+        
+        //set interactions
+        _interactions = new InteractionService(_client.Rest);
+        await _interactions.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
-        _client.Log += Log;
+        
+        //event handlers
+        _client.Log += LogAsync;
         _client.Ready += OnReady;
-
+        _client.InteractionCreated += HandleInteractions;
+        
+        //get token
         var json = await File.ReadAllTextAsync("config.json");
         var cfg = JsonSerializer.Deserialize<BotConfig>(json);
         var token = cfg!.Token;
@@ -32,7 +41,6 @@ class Program
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
         
-        await InitCommands();
         await Task.Delay(-1);
     }
 
@@ -41,32 +49,23 @@ class Program
         public string Token { get; init; } = null!;
     }
     
-    private async Task InitCommands()
+    private async Task HandleInteractions(SocketInteraction arg)
     {
-        await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
-        _client.MessageReceived += HandleCommandAsync;
+        var ctx = new SocketInteractionContext(_client, arg);
+        await _interactions.ExecuteCommandAsync(ctx, null);
     }
 
-    private async Task HandleCommandAsync(SocketMessage msg)
-    {
-        if (msg is not SocketUserMessage message || message.Author.IsBot) return;
-
-        var argPos = 0;
-        if (message.HasCharPrefix('/', ref argPos))
-        {
-            var context = new SocketCommandContext(_client, message);
-            Console.WriteLine("executing: " + msg.Content);
-            await _commands.ExecuteAsync(context, argPos, null);
-        }
-    }
-
-    private static Task OnReady()
+    private async Task<Task> OnReady()
     {
         Console.WriteLine("Bot is ready!");
+
+        const ulong guildId = 1411698864783888618;
+        await _interactions.RegisterCommandsToGuildAsync(guildId);
+        
         return Task.CompletedTask;
     }
 
-    private static Task Log(LogMessage msg)
+    private Task LogAsync(LogMessage msg)
     {
         Console.WriteLine(msg.ToString());
         return Task.CompletedTask;
