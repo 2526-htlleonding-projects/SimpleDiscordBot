@@ -7,5 +7,5 @@ public class NiceBot : InteractionModuleBase<SocketInteractionContext>
 {
     [SlashCommand("hibot", "a friendly greeting")]
     public async Task Greeting()
-        => await ReplyAsync("Hi dear messenger! Great to see you again!");
+        => await RespondAsync("Hi dear messenger! Great to see you again!");
 }
