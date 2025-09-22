@@ -1,16 +1,29 @@
 using Discord;
 using Discord.Interactions;
+using Discord.WebSocket;
 
 namespace DiscordBot_Core.modules;
 
 public class Judge : InteractionModuleBase<SocketInteractionContext>
 {
     [SlashCommand("judgeme", "you dare come before the judge?")]
-    public async Task Greeting()
+    public async Task JudgeMe()
     {
-        var allMembers = Context.Guild.Users
+        Console.WriteLine("-- Strating Trial --");
+        
+        var guild = Context.Guild as SocketGuild;
+        await guild.DownloadUsersAsync(); // fetches all members from the API
+        
+        var allMembers = guild.Users
             .Where(u => !u.IsBot) // skip bots
             .ToList();
+        
+        var numberOfMember = 0;
+        foreach (var member in allMembers)
+        {
+            numberOfMember++;
+            Console.WriteLine($"#{numberOfMember}: {member.Mention}");
+        }
 
         if (allMembers.Count < 2)
         {

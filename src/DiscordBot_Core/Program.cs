@@ -20,7 +20,7 @@ class Program
         //set client
         _client = new DiscordSocketClient(new DiscordSocketConfig
         {
-            GatewayIntents = GatewayIntents.AllUnprivileged | (GatewayIntents)4096
+            GatewayIntents = GatewayIntents.AllUnprivileged | (GatewayIntents)4096 |  GatewayIntents.GuildMembers | GatewayIntents.Guilds
         });
         
         //set interactions
