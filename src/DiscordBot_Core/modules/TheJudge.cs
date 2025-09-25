@@ -13,6 +13,7 @@ public class Judge : InteractionModuleBase<SocketInteractionContext>
         
         var guild = Context.Guild as SocketGuild;
         await guild.DownloadUsersAsync(); // fetches all members from the API
+        var user =  Context.User as SocketGuildUser;
         
         var allMembers = guild.Users
             .Where(u => !u.IsBot) // skip bots
@@ -31,25 +32,23 @@ public class Judge : InteractionModuleBase<SocketInteractionContext>
             return;
         }
 
-        var random = new Random();
-
-        // Pick random number just for flavor
-        var randomNumber = random.Next(1, allMembers.Count + 1);
-
-        // Shuffle
-        var shuffled = allMembers.OrderBy(_ => random.Next()).ToArray();
+        var shuffled = allMembers;
+        shuffled.Shuffle();
 
         // Split
         var half = allMembers.Count / 2;
         var guiltyList = shuffled.Take(half + (allMembers.Count % 2)).Select(u => u.Username);
         var innocentList = shuffled.Skip(half + (allMembers.Count % 2)).Select(u => u.Username);
 
+        // guilty verdict
+        var isGuilty = guiltyList.Contains(user?.Username);
+        var judgement = "not guilty";
+        if(isGuilty) judgement = "guilty";
+        
         // Build embed
         var embed = new EmbedBuilder()
-            .WithTitle("⚖️ The Judge Has Spoken ⚖️")
-            .WithDescription($"Random Number: **{randomNumber}**\n\n" +
-                             $"**Guilty:** {string.Join(", ", guiltyList)}\n\n" +
-                             $"**Innocent:** {string.Join(", ", innocentList)}")
+            .WithTitle("The Judge Has Spoken")
+            .WithDescription($"You, {user?.Username}, are **{judgement}**.")
             .WithColor(Color.DarkRed);
 
         await RespondAsync(embed: embed.Build());
