@@ -10,10 +10,21 @@ public class NiceBot : InteractionModuleBase<SocketInteractionContext>
     public async Task Greeting()
     {
         var name = Context.User.Username;
-        /*var embed = new EmbedBuilder();   
-        embed.Description = "Nigga";
-        embed.Title = "Greetings";*/
-        if(name is "integr_" or "schokoladenmuffin.") await RespondAsync($"You are a fucking monkey {name}! (You've reached EvilBot)");
-        else await RespondAsync($"You are a lovely person {name}! (You've reached NiceBot)");
+
+        string[] insults =
+            ["fucking monkey", "retard", "dumb ahh", "little bitch", "Beckenrandschwimmer", "Schwammerl"];
+
+        var rnd = new Random();
+
+        if (name is "integr_" or "schokoladenmuffin.")
+        {
+            await RespondAsync($"You are a {insults[rnd.Next(1, insults.Length + 1)]} {name}! (You've reached EvilBot)");
+            Console.WriteLine("insulting Erik and Almir...");
+        }
+        else
+        {
+            await RespondAsync($"You are a lovely person {name}! (You've reached NiceBot)");
+            Console.WriteLine("being a nice bot...");
+        }
     }
 }

@@ -32,13 +32,12 @@ public class Judge : InteractionModuleBase<SocketInteractionContext>
             return;
         }
 
-        var shuffled = allMembers;
-        shuffled.Shuffle();
+        allMembers.Shuffle();
 
         // Split
         var half = allMembers.Count / 2;
-        var guiltyList = shuffled.Take(half + (allMembers.Count % 2)).Select(u => u.Username);
-        var innocentList = shuffled.Skip(half + (allMembers.Count % 2)).Select(u => u.Username);
+        var guiltyList = allMembers.Take(half + (allMembers.Count % 2)).Select(u => u.Username);
+        var innocentList = allMembers.Skip(half + (allMembers.Count % 2)).Select(u => u.Username);
 
         // guilty verdict
         var isGuilty = guiltyList.Contains(user?.Username);
